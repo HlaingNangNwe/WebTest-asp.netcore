@@ -1,0 +1,43 @@
+﻿
+
+<h1>Index</h1>
+
+
+    <h3>Cart Page</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Option</th>
+                <th>Id</th>
+                <th>Name</th>
+                 <th>Price</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+            </tr>
+            </thead>
+        <tbody>
+            @foreach (var item in ViewBag.cart)
+            {
+                <tr>
+                    <td><a asp-controller="cart" asp-action="remove" asp-route-id="@item.Book.bookId">Remove</a></td>
+                    <td>@item.Book.bookId</td>
+                    <td>@item.Book.Name</td>
+
+                    <td>@item.Book.Price</td>
+                    @*  <td>@item.Category.CategoryName</td>*@
+
+                    <td>@item.Quantity</td>
+                    <td>@(item.Book.Price * item.Quantity)</td>
+                </tr>
+            }
+            <tr>
+                <td align="right" colspan="6">Sum</td>
+                <td>
+                    @ViewBag.total
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a asp-controller="Book" asp-action="index">Continue Shopping</a>
+
