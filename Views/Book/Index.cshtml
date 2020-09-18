@@ -1,0 +1,56 @@
+﻿
+@model MyWebTest.Models.BookCategoryViewModel
+
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Book" asp-action="Index" method="get">
+    <p>
+
+        <select asp-for="BookCate" asp-items="Model.Cate">
+            <option value="">All</option>
+        </select>
+
+        Category: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>BookTitle</th>
+            <th>Author Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Buy</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in ViewBag.books)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Author</td>
+
+                <td>@product.Price</td>
+                <td>@product.Category.CategoryName</td>
+
+                <td align="center">
+                    <a asp-controller="cart" asp-action="buy" asp-route-id="@product.bookId">Buy Now</a>
+                </td>
+            
+        
+                <td>
+                    <a asp-action="Edit" asp-route-id="@product.bookId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@product.bookId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@product.bookId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
